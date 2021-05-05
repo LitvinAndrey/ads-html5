@@ -1,0 +1,61 @@
+.course-detail-container {
+  margin: 10px;
+  .course-details {
+    margin-top: 10px;
+    display: flex;
+    .preview {
+      border: 1px solid #dcdacb;
+      border-radius: 2px;
+      width: 300px;
+    }
+    .attributes {
+      margin-left: auto;
+      margin-right: 20px;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      .attribute-container {
+        display: flex;
+        color: #73726c;
+        .attribute-value {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  .course-detail-name {
+    font-size: 40px;
+  }
+  .rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .rating-container {
+      margin-left: 10px;
+    }
+  }
+  .lessons-name,
+  .reviews-name {
+    border-top: 1px solid #dcdacb;
+    margin-top: 20px;
+    font-size: 40px;
+    padding-top: 20px;
+  }
+  .review {
+    border: 1px solid #dcdacb;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  .lessons {
+    .lesson {
+      margin-top: 5px;
+      border: 1px solid #dcdacb;
+      padding: 5px;
+      .available,
+      .unavailable {
+        font-size: 12px;
+      }
+    }
+  }
+}

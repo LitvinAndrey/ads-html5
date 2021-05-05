@@ -1,0 +1,14 @@
+.background {
+  min-height: 100%;
+  background-position: center;
+  padding-top: 56px;
+  padding-bottom: 48px;
+  .content {
+    margin-left: 110px;
+    margin-right: 110px;
+    display: flex;
+    flex-flow: column;
+    background-color: white;
+    min-height: calc(100vh - 104px);
+  }
+}

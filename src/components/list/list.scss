@@ -1,0 +1,38 @@
+.list {
+  background-color: white;
+  .list-item {
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #dcdacb;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    .preview {
+      width: 200px;
+    }
+    .description {
+      margin-left: 10px;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      .name {
+        font-size: 1.6rem;
+      }
+      .attribute-container {
+        display: flex;
+        color: #73726c;
+        .attribute-value {
+          margin-left: 5px;
+        }
+      }
+    }
+    .rating {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      min-width: 100px;
+    }
+  }
+}

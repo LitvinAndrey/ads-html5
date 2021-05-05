@@ -1,0 +1,31 @@
+.app.loading {
+  overflow: hidden;
+  height: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  .form-input {
+    display: flex;
+    align-items: center;
+    label {
+      min-width: 100px;
+      margin: 0;
+    }
+  }
+  span.error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+  input {
+    margin-top: 5px;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+}

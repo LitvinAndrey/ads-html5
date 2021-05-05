@@ -1,0 +1,19 @@
+.available {
+  border: 1px solid;
+  display: inline;
+  margin-left: 5px;
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 5px;
+  background-color: #00ff00;
+}
+
+.unavailable {
+  border: 1px solid;
+  display: inline;
+  margin-left: 5px;
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 5px;
+  background-color: #dc143c;
+}

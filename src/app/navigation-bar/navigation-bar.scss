@@ -1,0 +1,13 @@
+#root {
+  .navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    .search-input {
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+  }
+}
