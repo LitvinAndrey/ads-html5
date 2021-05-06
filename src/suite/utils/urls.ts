@@ -18,8 +18,16 @@ export enum SectionsUrls {
   BASE = '/sections',
 }
 
+export enum ReviewsUrls {
+  BASE = '/reviews',
+}
+
+export enum UserUrls {
+  SUBSCRIBE = '/users/courses/',
+}
+
 export enum AuthorizationUrls {
   LOGIN = '/login',
-  LOGGED = '/logged',
+  LOGGED = '/users/logged',
   REGISTRATION = '/registration',
 }

@@ -5,5 +5,5 @@ export interface CourseShort {
   id: number;
   nameOfCourse: string;
   status: Status;
-  lessons: LessonShort[];
+  lessons?: LessonShort[];
 }

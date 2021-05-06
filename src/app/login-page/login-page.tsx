@@ -36,7 +36,7 @@ export const LoginPage = observer(
             <label>Логин:</label>
             <input placeholder={'Введите логин'} type={'text'} {...register('login', { required: true })} />
           </div>
-          {errors.username && <span className={'error'}>Логин не должен быть пустым</span>}
+          {errors.login && <span className={'error'}>Логин не должен быть пустым</span>}
           <div className={'form-input'}>
             <label>Пароль:</label>
             <input placeholder={'Введите пароль'} type={'password'} {...register('password', { required: true })} />

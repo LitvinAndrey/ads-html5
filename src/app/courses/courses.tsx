@@ -27,7 +27,7 @@ export const Courses: React.FC<CoursesProps> = observer((props) => {
   return (
     <>
       <div className={'message'}>{coursesStore.message}</div>
-      <List ratingReadonly items={convertToListItems(coursesStore.courses)}></List>
+      <List ratingReadonly items={convertToListItems(coursesStore.courses)} />
     </>
   );
 });

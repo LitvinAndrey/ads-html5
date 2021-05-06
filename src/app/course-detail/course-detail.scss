@@ -1,5 +1,12 @@
 .course-detail-container {
   margin: 10px;
+  position: relative;
+  .subscribe-container {
+    margin-left: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   .course-details {
     margin-top: 10px;
     display: flex;

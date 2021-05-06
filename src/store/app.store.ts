@@ -1,6 +1,16 @@
 import { makeAutoObservable } from 'mobx';
 import { createContext } from 'react';
-import { AuthorizationUrls, Course, getQuery, getUrlWithHost, User } from '../suite';
+import {
+  AuthorizationUrls,
+  Course,
+  CoursesUrls,
+  getQuery,
+  getUrlWithHost,
+  Review,
+  ReviewsUrls,
+  User,
+  UserUrls,
+} from '../suite';
 import { BreadcrumbsPath, HomePath } from '../suite/models/breadcrumbs-path';
 import { CoursesStore, coursesStore, DEFAULT_MESSAGE } from './courses.store';
 import { SectionStore, sectionStore } from './sections.store';
@@ -27,6 +37,7 @@ export class AppStore {
   }
 
   async init(): Promise<void> {
+    await this.getCurrentUser();
     await this.coursesStore.load();
     await this.sectionStore.load();
     await this.subjectStore.load();
@@ -48,6 +59,72 @@ export class AppStore {
     this.spinnerStore.setLoading(false);
   }
 
+  async getCurrentUser(): Promise<void> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const result = await getQuery().get<User>(getUrlWithHost(AuthorizationUrls.LOGGED));
+        if (result.status === 200) {
+          this.user = result.data;
+        } else {
+          localStorage.removeItem('token');
+        }
+      } catch {
+        localStorage.removeItem('token');
+      }
+    }
+  }
+
+  async addReview(data: Review): Promise<boolean> {
+    this.spinnerStore.setLoading(true);
+    try {
+      const result = await getQuery().post<Review>(getUrlWithHost(ReviewsUrls.BASE), data);
+      if (result.status === 201) {
+        const course = await getQuery().get<Course>(getUrlWithHost(CoursesUrls.BASE + `/${this.course.id}`));
+        await this.coursesStore.load();
+        this.setCourse(course.data);
+      }
+      return result.status === 201;
+    } catch {
+      return false;
+    } finally {
+      this.spinnerStore.setLoading(false);
+    }
+  }
+
+  async logout(): Promise<void> {
+    localStorage.removeItem('token');
+    this.user = null;
+  }
+
+  async register(data: unknown): Promise<boolean> {
+    this.spinnerStore.setLoading(true);
+    try {
+      const result = await getQuery().post<User>(getUrlWithHost(AuthorizationUrls.REGISTRATION), data);
+      return result.status === 201;
+    } catch {
+      return false;
+    } finally {
+      this.spinnerStore.setLoading(false);
+    }
+  }
+
+  async subscribeToCourse(): Promise<void> {
+    this.spinnerStore.setLoading(true);
+    try {
+      const result = await getQuery().put<unknown>(getUrlWithHost(UserUrls.SUBSCRIBE + this.course.id));
+      if (result.status === 200) {
+        const userLoggedResult = await getQuery().get<User>(getUrlWithHost(AuthorizationUrls.LOGGED));
+        const courseResult = await getQuery().get<Course>(getUrlWithHost(CoursesUrls.BASE + `/${this.course.id}`));
+        await this.coursesStore.load();
+        this.user = userLoggedResult.data;
+        this.setCourse(courseResult.data);
+      }
+    } finally {
+      this.spinnerStore.setLoading(false);
+    }
+  }
+
   async login(data: unknown): Promise<boolean> {
     this.spinnerStore.setLoading(true);
     try {
@@ -65,9 +142,10 @@ export class AppStore {
         this.spinnerStore.setLoading(false);
         return false;
       }
+    } catch {
+      return false;
     } finally {
       this.spinnerStore.setLoading(false);
-      return false;
     }
   }
 

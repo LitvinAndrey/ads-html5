@@ -25,13 +25,16 @@ export const NavigationBar: React.FC = observer(() => {
       <NavigationTrigger />
       <Switch>
         <Route path={'/detail/:id'}>
-          <div className={'test'}></div>
+          <div className={'test'} />
         </Route>
         <Route path={'/login'}>
-          <div></div>
+          <div />
         </Route>
         <Route path={'/registration'}>
-          <div></div>
+          <div />
+        </Route>
+        <Route path={'/user-courses'}>
+          <div />
         </Route>
         <Route>
           <InputGroup className={'search-input'}>

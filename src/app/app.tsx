@@ -13,6 +13,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs';
 import { CourseDetail } from './course-detail/course-detail';
 import { LoginPage } from './login-page/login-page';
 import { RegistrationPage } from './registration-page/registration-page';
+import { UserCourses } from './user-courses/user-courses';
 
 export const App: React.FC = observer(() => {
   const spinnerStore: SpinnerStore = useContext(spinnerStoreContext);
@@ -35,6 +36,9 @@ export const App: React.FC = observer(() => {
           </Route>
           <Route path={'/detail/:id'}>
             <CourseDetail />
+          </Route>
+          <Route path={'/user-courses'}>
+            <UserCourses />
           </Route>
           <Route path={'/login'}>
             <LoginPage />

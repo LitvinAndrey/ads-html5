@@ -6,6 +6,8 @@ import { RatingComponent } from '../../components/rating/rating';
 import { AppStore, appStoreContext } from '../../store/app.store';
 import { calculateRating, getAttributesForCourse, getAttributeValue } from '../../suite';
 import './course-detail.scss';
+import { AddReviewComponent } from './add-review/add-review';
+import { Button } from 'react-bootstrap';
 
 interface CourseDetailParams {
   id: string;
@@ -14,6 +16,7 @@ interface CourseDetailParams {
 export const CourseDetail: React.FC = observer(() => {
   const { id } = useParams<CourseDetailParams>();
   const appStore: AppStore = useContext(appStoreContext);
+
   useEffect(() => {
     if (id) {
       appStore.loadCourseById(+id);
@@ -22,11 +25,25 @@ export const CourseDetail: React.FC = observer(() => {
       appStore.loadCourseById(-10000);
     };
   }, [id]);
+
+  const handleSubscribeToCourse = () => {
+    appStore.subscribeToCourse();
+  };
+
   return appStore.course ? (
     <div className={'course-detail-container'}>
       <div className={'course-detail-name'}>{appStore.course.nameOfCourse}</div>
+      {appStore.user ? (
+        <div className={'subscribe-container'}>
+          {appStore.user.courses.find((course) => course.id === appStore.course.id) ? (
+            <Button disabled>Вы уже подписаны</Button>
+          ) : (
+            <Button onClick={handleSubscribeToCourse}>Записаться</Button>
+          )}
+        </div>
+      ) : null}
       <div className={'course-details'}>
-        <img className={'preview'} src={appStore.course.preview || NO_ITEM_PREVIEW_PATH}></img>
+        <img className={'preview'} src={appStore.course.preview || NO_ITEM_PREVIEW_PATH} />
         <div className={'attributes'}>
           {getAttributesForCourse(appStore.course).map((attribute) => (
             <div key={attribute.label} className="attribute-container">
@@ -55,7 +72,11 @@ export const CourseDetail: React.FC = observer(() => {
         )}
       </div>
       <div className={'reviews-name'}>Отзывы</div>
-      <div className={'reviews-unavailable'}>Только пользователи могут оставлять отзыв</div>
+      {appStore.user ? (
+        <AddReviewComponent course={appStore.course} />
+      ) : (
+        <div className={'reviews-unavailable'}>Только пользователи могут оставлять отзыв</div>
+      )}
       <div className={'reviews'}>
         {appStore.course.reviews.map((review) => (
           <div key={review.id} className="review">

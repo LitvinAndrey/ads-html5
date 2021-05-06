@@ -5,3 +5,17 @@
     margin-left: 5px;
   }
 }
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  .logout-btn.btn.btn-primary {
+    background: transparent;
+    border-color: transparent;
+    color: black;
+    &:focus, &:active {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+

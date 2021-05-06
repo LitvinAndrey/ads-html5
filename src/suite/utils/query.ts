@@ -14,6 +14,7 @@ export const getQuery = (): CustomQuery => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
+        crossdomain: true,
       }
     : null;
   return {

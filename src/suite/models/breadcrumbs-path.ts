@@ -21,4 +21,9 @@ export const RegistrationPath: RootPath = {
   label: 'Регистрация',
 };
 
+export const UserCoursesPath: RootPath = {
+  value: 'user-courses',
+  label: 'Курсы пользователя',
+};
+
 export type BreadcrumbsPath = [RootPath, Section?, Subject?, Course?];

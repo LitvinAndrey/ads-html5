@@ -1,0 +1,10 @@
+.add-review-container {
+  display: flex;
+  flex-direction: column;
+  .rating-container {
+    margin-left: auto;
+  }
+  .btn {
+    width: 200px;
+  }
+}
